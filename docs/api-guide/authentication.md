@@ -27,7 +27,7 @@ For information on how to set up the permission policies for your API please see
 
 ---
 
-## How authentication is determined
+## How Authentication Is Determined
 
 The authentication schemes are always defined as a list of classes.  REST framework will attempt to authenticate with each class in the list, and will set `request.user` and `request.auth` using the return value of the first class that successfully authenticates.
 
@@ -35,7 +35,7 @@ If no class authenticates, `request.user` will be set to an instance of `django.
 
 The value of `request.user` and `request.auth` for unauthenticated requests can be modified using the `UNAUTHENTICATED_USER` and `UNAUTHENTICATED_TOKEN` settings.
 
-## Setting the authentication scheme
+## Setting the Authentication Scheme
 
 The default authentication schemes may be set globally, using the `DEFAULT_AUTHENTICATION_CLASSES` setting.  For example.
 
@@ -77,7 +77,7 @@ Or, if you're using the `@api_view` decorator with function based views.
         }
         return Response(content)
 
-## Unauthorized and Forbidden responses
+## Unauthorized and Forbidden Responses
 
 When an unauthenticated request is denied permission there are two different error codes that may be appropriate.
 
@@ -169,7 +169,7 @@ The `curl` command line tool may be useful for testing token authenticated APIs.
 
 #### Generating Tokens
 
-##### By using signals
+##### Via Django Signals
 
 If you want every user to have an automatically generated Token, you can simply catch the User's `post_save` signal.
 
@@ -193,7 +193,7 @@ If you've already created some users, you can generate tokens for all existing u
     for user in User.objects.all():
         Token.objects.get_or_create(user=user)
 
-##### By exposing an api endpoint
+##### Via an API Endpoint
 
 When using `TokenAuthentication`, you may want to provide a mechanism for clients to obtain a token given the username and password.  REST framework provides a built-in view to provide this behaviour.  To use it, add the `obtain_auth_token` view to your URLconf:
 
@@ -242,7 +242,7 @@ And in your `urls.py`:
     ]
 
 
-##### With Django admin
+##### Via Django's Admin Interface
 
 It is also possible to create Tokens manually through the admin interface. In case you are using a large user base, we recommend that you monkey patch the `TokenAdmin` class customize it to your needs, more specifically by declaring the `user` field as `raw_field`.
 
@@ -253,7 +253,7 @@ It is also possible to create Tokens manually through the admin interface. In ca
     TokenAdmin.raw_id_fields = ['user']
 
 
-#### Using Django manage.py command
+#### Via Django's `manage.py` Command
 
 Since version 3.6.4 it's possible to generate a user token using the following command:
 
@@ -307,7 +307,7 @@ Consult your web server's documentation for information about configuring an aut
 * [NGINX (Restricting Access)](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
 
 
-# Custom authentication
+# Custom Authentication
 
 To implement a custom authentication scheme, subclass `BaseAuthentication` and override the `.authenticate(self, request)` method.  The method should return a two-tuple of `(user, auth)` if authentication succeeds, or `None` otherwise.
 
@@ -351,7 +351,7 @@ The following example will authenticate any incoming request as the user given b
 
 ---
 
-# Third party packages
+# Third-Party Packages
 
 The following third-party packages are also available.
 
@@ -359,7 +359,7 @@ The following third-party packages are also available.
 
 The [Django OAuth Toolkit][django-oauth-toolkit] package provides OAuth 2.0 support and works with Python 3.4+. The package is maintained by [jazzband][jazzband] and uses the excellent [OAuthLib][oauthlib].  The package is well documented, and well supported and is currently our **recommended package for OAuth 2.0 support**.
 
-#### Installation & configuration
+#### Installation & Configuration
 
 Install using `pip`.
 
@@ -378,15 +378,15 @@ Add the package to your `INSTALLED_APPS` and modify your REST framework settings
         ]
     }
 
-For more details see the [Django REST framework - Getting started][django-oauth-toolkit-getting-started] documentation.
+For more details see the [Django REST framework - Getting Started][django-oauth-toolkit-getting-started] documentation.
 
-## Django REST framework OAuth
+## Django REST Framework: OAuth
 
 The [Django REST framework OAuth][django-rest-framework-oauth] package provides both OAuth1 and OAuth2 support for REST framework.
 
 This package was previously included directly in the REST framework but is now supported and maintained as a third-party package.
 
-#### Installation & configuration
+#### Installation & Configuration
 
 Install the package using `pip`.
 
