@@ -169,7 +169,7 @@ The `curl` command line tool may be useful for testing token authenticated APIs.
 
 #### Generating Tokens
 
-##### By using signals
+##### Via Django Signals
 
 If you want every user to have an automatically generated Token, you can simply catch the User's `post_save` signal.
 
@@ -193,7 +193,7 @@ If you've already created some users, you can generate tokens for all existing u
     for user in User.objects.all():
         Token.objects.get_or_create(user=user)
 
-##### By exposing an api endpoint
+##### Via an API Endpoint
 
 When using `TokenAuthentication`, you may want to provide a mechanism for clients to obtain a token given the username and password.  REST framework provides a built-in view to provide this behaviour.  To use it, add the `obtain_auth_token` view to your URLconf:
 
@@ -242,7 +242,7 @@ And in your `urls.py`:
     ]
 
 
-##### With Django admin
+##### Via Django's Admin Interface
 
 It is also possible to create Tokens manually through the admin interface. In case you are using a large user base, we recommend that you monkey patch the `TokenAdmin` class customize it to your needs, more specifically by declaring the `user` field as `raw_field`.
 
@@ -253,7 +253,7 @@ It is also possible to create Tokens manually through the admin interface. In ca
     TokenAdmin.raw_id_fields = ['user']
 
 
-#### Using Django manage.py command
+#### Using Django's `manage.py` Command
 
 Since version 3.6.4 it's possible to generate a user token using the following command:
 
@@ -386,7 +386,7 @@ The [Django REST framework OAuth][django-rest-framework-oauth] package provides 
 
 This package was previously included directly in the REST framework but is now supported and maintained as a third-party package.
 
-#### Installation & configuration
+#### Installation & Configuration
 
 Install the package using `pip`.
 
